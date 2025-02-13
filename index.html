@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://dev.iaoi.in/iaoi.jpg') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .box {
+            width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .back-button,
+        .submit-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .back-button {
+            background-color: black;
+        }
+
+        .submit-button {
+            background-color: #01b2aa;
+        }
+
+        .back-button:hover {
+            background-color: #333;
+        }
+        #selected_plan {
+    color: #01b2aa;
+}
+
+
+        .submit-button:hover {
+            background-color: #008000;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
+        #step2 {
+            display: none;
+        }
+        .terms-container {
+            display: flex;
+            align-items: center;
+        }
+        .terms-container input {
+            margin-right: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="step1">
+            <h1>IAOI Global Implant Summit - 2025 <br>(Aug 2<sup>nd</sup> & 3<sup>rd</sup>) SATURDAY & SUNDAY</h1>
+            <h2 style="color: #01b2aa;">Register Now</h2>
+            <label for="category">Select Plan</label>
+            <select id="category" required onchange="updateFields()">
+                <option value="">Select Plans</option>
+                <option value="IAOI MEMBERS">IAOI Members</option>
+                <option value="AFFLIATE MEMBERS">Affiliate Association Members</option>
+                <option value="COMBO - NEW MEMBER + CONFERENCE">Combo - New Member + Conference</option>
+            </select>
+
+            <div id="inputFields" class="input-container"></div>
+            <p class="error" id="error-message">Member not found. Please check the Member ID.</p>
+            <button class="submit-button" onclick="nextStep()">Next</button>
+        </div>
+
+        <div id="step2">
+            <h3>Plan Details</h3>
+            <table style="border-collapse: collapse; width: 100%;">
+                <tr>
+                    <td style="padding: 5px 10px; text-align: left;">Selected Plan</td>
+                    <td style="padding: 5px 10px; text-align: left;">:</td>
+                    <td style="padding: 5px 10px; text-align: left;">
+                        <strong id="selected_plan" style="color: #01b2aa;">IAOI MEMBER</strong>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; text-align: left;">Plan Amount</td>
+                    <td style="padding: 5px 10px; text-align: left;">:</td>
+                    <td style="padding: 5px 10px; text-align: left;"><strong id="plan_amount">₹0</strong></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; text-align: left;">GST (18%)</td>
+                    <td style="padding: 5px 10px; text-align: left;">:</td>
+                    <td style="padding: 5px 10px; text-align: left;"><strong id="gst_amount">₹0</strong></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; text-align: left;">Total Payable Amount</td>
+                    <td style="padding: 5px 10px; text-align: left;">:</td>
+                    <td style="padding: 5px 10px; text-align: left; color: #01b2aa;"><strong id="total_amount">₹0</strong></td>
+                </tr>
+            </table>
+            <div class="terms-container">
+                <input type="checkbox" id="agree" required>
+<label for="agree">I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
+
+            </div>
+            <div class="button-container">
+                <button class="back-button" onclick="prevStep()">Back</button>
+                <button class="submit-button" type="submit">Submit</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        function updateFields() {
+            let category = document.getElementById("category").value;
+            let inputFields = document.getElementById("inputFields");
+            inputFields.innerHTML = "";
+
+            if (category === "IAOI MEMBERS") {
+                inputFields.innerHTML = `
+                <label for="member_id">Member ID</label>
+                <input type="text" id="member_id" name="member_id" required placeholder="Enter Member ID" onblur="fetchMemberDetails()">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter Your Name">
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter Your Email Address">
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter Your Phone Number">
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required placeholder="Enter Your Address">
+
+                `;
+            }
+            else if (category === "AFFLIATE MEMBERS") {
+                inputFields.innerHTML = `
+                    <label for="association_id">Association ID</label>
+                    <input type="text" id="association_id" name="member_id" required placeholder="Enter Association ID" ">
+
+                    <label for="association_name">Association Name</label>
+                    <input type="text" id="association_name" name="association_id" required placeholder="Enter Your Association Name">
+
+                    <label for="name">Your Full Name</label>
+                    <input type="name" id="name" name="name" required placeholder="Enter Your Full Name">
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter Your Email Address">
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter Your Phone Number">
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required placeholder="Enter Your Address">
+
+                `;
+            }
+            else if (category === "COMBO - NEW MEMBER + CONFERENCE") {
+                inputFields.innerHTML = `
+                    <label for="name">Your Full Name</label>
+                    <input type="name" id="name" name="name" required placeholder="Enter Your Full Name">
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter Your Email Address">
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter Your Phone Number">
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required placeholder="Enter Your Address">
+
+                `;
+            }
+        }
+
+        function fetchMemberDetails() {
+            let memberId = document.getElementById("member_id").value.trim();
+            let errorMessage = document.getElementById("error-message");
+
+            if (!memberId) return;
+
+            fetch(`https://dev.iaoi.in/api/v1/member/findMember/${memberId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.statusCode === 200 && data.result.length > 0) {
+                        let member = data.result[0];
+
+                        document.getElementById("name").value = member.fullName || "";
+                        document.getElementById("email").value = member.email_id || "";
+                        document.getElementById("phone").value = member.mobile_no || "";
+                        document.getElementById("address").value = member.address || "";
+
+                        errorMessage.style.display = "none";
+                    } else {
+                        errorMessage.style.display = "block";
+                    }
+                })
+                .catch(() => errorMessage.style.display = "block");
+        }
+
+        function nextStep() {
+            let category = document.getElementById('category').value;
+            if (!category) return alert("Please select a plan first!");
+
+            document.getElementById('step1').style.display = "none";
+            document.getElementById('step2').style.display = "block";
+            document.getElementById("selected_plan").innerText = category;
+
+            let planAmount = category === "IAOI MEMBERS" ? 6500 : category === "AFFLIATE MEMBERS" ? 8500 : 11000;
+            let gstAmount = planAmount * 0.18;
+            let totalAmount = planAmount + gstAmount;
+
+            document.getElementById("plan_amount").innerText = `₹ ${planAmount.toFixed(2)}`;
+            document.getElementById("gst_amount").innerText = `₹ ${gstAmount.toFixed(2)}`;
+            document.getElementById("total_amount").innerText = `₹ ${totalAmount.toFixed(2)}`;
+        }
+
+        function prevStep() {
+            document.getElementById('step1').style.display = "block";
+            document.getElementById('step2').style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
