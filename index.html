@@ -4,38 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
 <body>
     <div class="box">
-        <div id="step1">
+        <div id="step0">
             <h1>IAOI Global Implant Summit - 2025 <br>(Aug 2<sup>nd</sup> & 3<sup>rd</sup>) SATURDAY & SUNDAY</h1>
-            <h2 style="color: #01b2aa;">Register Now</h2>
+            <h1>Register Now</h1>
+            <h2 style="color: #01b2aa;">Are you an existing member?</h2>
+            <button class="submit-button" onclick="handleMembershipChoice('yes')">Yes</button>
+            <button class="submit-button" onclick="handleMembershipChoice('no')">No</button>
+        </div>
+
+        <!-- Step 1: Plan Selection -->
+        <div id="step1" style="display: none;">
+            <h1>Registration</h1>
             <label for="category">Select Plan</label>
             <select id="category" required onchange="updateFields()">
                 <option value="">Select Plans</option>
                 <option value="IAOI MEMBERS">IAOI Members</option>
                 <option value="AFFLIATE MEMBERS">Affiliate Association Members</option>
                 <option value="COMBO - NEW MEMBER + CONFERENCE">Combo - New Member + Conference</option>
-                <option value="GROUP REGISTRATIONS">Group Registration(Min 10 Members)</option>
-                <option value="INTERNATIONAL DELEGATES">Internatiol Delegates</option>
+                <option value="GROUP REGISTRATIONS">Group Registration (Min 10 Members)</option>
+                <option value="INTERNATIONAL DELEGATES">International Delegates</option>
             </select>
 
             <div id="inputFields"></div>
             <p class="error" id="error-message">Member not found. Please check the Member ID.</p>
+            <button class="back-button" onclick="prevStep()">Back</button>
             <button class="submit-button" onclick="nextStep()">Next</button>
         </div>
 
-        <div id="step2">
+        <!-- Step 2: Plan Details -->
+        <div id="step2" style="display: none;">
             <h3>Plan Details</h3>
             <table style="border-collapse: collapse; width: 100%; text-align: left;">
                 <tr>
                     <td>Selected Plan</td>
                     <td>:</td>
-                    <td><strong id="selected_plan" style="color: #01b2aa;">IAOI MEMBER</strong></td>
+                    <td><strong id="selected_plan" style="color: #01b2aa;"></strong></td>
                 </tr>
                 <tr>
                     <td>Plan Amount</td>

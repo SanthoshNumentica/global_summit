@@ -37,7 +37,7 @@ function updateFields() {
     <input type="text" id="member_ids" required placeholder="Enter Member IDs" onkeypress="handleKeyPress(event)">
     <div id="verification_results"></div>
 `,
-"INTERNATIONAL DELEGATES": ''
+        "INTERNATIONAL DELEGATES": ''
     };
     inputFields.innerHTML = (fields[category] + commonFields || "");
 }
@@ -105,13 +105,32 @@ function fetchMemberDetails() {
         })
         .catch(() => errorMessage.style.display = "block");
 }
+document.addEventListener("DOMContentLoaded", function () {
+    // Ensure step0 is shown initially
+    document.getElementById("step0").style.display = "block";
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "none";
+});
+
+function handleMembershipChoice(choice) {
+    document.getElementById("step0").style.display = "none";
+
+    if (choice === "yes") {
+        document.getElementById("step1").style.display = "block";
+    } else {
+        document.getElementById("step1").style.display = "block"; // For now, go to the same step
+    }
+}
 
 function nextStep() {
-    const category = document.getElementById('category').value;
-    if (!category) return alert("Please select a plan first!");
+    const category = document.getElementById("category").value;
+    if (!category) {
+        alert("Please select a plan first!");
+        return;
+    }
 
-    document.getElementById('step1').style.display = "none";
-    document.getElementById('step2').style.display = "block";
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "block";
     document.getElementById("selected_plan").innerText = category;
 
     const today = new Date();
@@ -144,6 +163,15 @@ function nextStep() {
 }
 
 function prevStep() {
-    document.getElementById('step1').style.display = "block";
-    document.getElementById('step2').style.display = "none";
+    if (document.getElementById("step1").style.display === "block") {
+        // If we are on step1, go back to step0
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step0").style.display = "block";
+    } else if (document.getElementById("step2").style.display === "block") {
+        // If we are on step2, go back to step1
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step1").style.display = "block";
+    }
 }
+    
+
