@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://dev.iaoi.in/iaoi.jpg') no-repeat center center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.box {
+    width: 600px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+
+select,
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.button-container {
+display: flex;
+justify-content: center; /* Centers buttons horizontally */
+align-items: center; /* Aligns buttons vertically */
+margin-top: 10px;
+gap: 10px; /* Adds space between buttons */
+}
+
+.back-button,
+.submit-button {
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+color: white;
+text-align: center;
+}
+
+
+
+.back-button {
+    background-color: black;
+}
+
+.submit-button {
+    background-color: #01b2aa;
+}
+
+.back-button:hover {
+    background-color: #333;
+}
+
+#selected_plan {
+    color: #01b2aa;
+}
+
+.submit-button:hover {
+    background-color: #008000;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+
+#step2 {
+    display: none;
+}
+
+.terms-container input {
+    margin-right: 1px;
+}
+
+.tag {
+    display: inline-block;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+    position: relative;
+}
+
+.verified {
+    background-color: green;
+    /* Color for verified */
+}
+
+.not-found {
+    background-color: red;
+    /* Color for not found */
+}
+
+.delete {
+    margin-left: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.input-container {
+    max-width: 200px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: calc(100% - 4px);
+    /* Adjust width to accommodate padding */
+    padding: 5px;
+    margin: 2px 2px;
+    /* Adds a 2px gap on both left and right */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Ensures padding doesn't increase element width */
+}
