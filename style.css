@@ -1,14 +1,23 @@
+/* Global Styles */
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('https://dev.iaoi.in/iaoi.jpg') no-repeat center center/cover;
+    background: url('https://dev.iaoi.in/iaoi.jpg') no-repeat center bottom;
+    background-size: cover;
+    background-attachment: fixed;
     position: relative;
     overflow: hidden;
+    font-family: sans-serif;
+    color: #333;
+    font-size: 16px;
+    image-rendering: crisp-edges; /* Ensures better quality */
 }
 
+
+/* Dark Overlay */
 body::before {
     content: "";
     position: absolute;
@@ -16,93 +25,240 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: inherit;
-    filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7);
     z-index: -1;
 }
 
+/* Container Box */
 .box {
     width: 600px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    padding: 50px;
+    background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    overflow-y: auto;
+    max-height: 80vh;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* Custom scrollbar styles */
+.box::-webkit-scrollbar {
+    width: 8px; /* Adjust the width of the scrollbar */
+
+}
+
+.box::-webkit-scrollbar-track {
+    background-color: #efd7d9; /* Background color of the track */
+    border-radius:0px 10px 10px 0px; /* Rounded corners for track */
+}
+
+.box::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    border: 1px solid #efd7d9; /* Optional: Adds border to thumb */
 }
 
 
-select,
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+/* Headings */
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #222;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #222;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
+h5,
+h6 {
     font-size: 16px;
+    font-weight: 600;
+    color: #555;
 }
 
+/* Labels */
 label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
     text-align: left;
-    font-weight: bold;
     display: block;
     margin-top: 10px;
 }
 
+/* Inputs & Select */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    background: transparent;
+    color: #333;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #888;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Input Container: Label & Input in a Single Row */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.input-container label {
+    flex: 1; /* Adjust width based on content */
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    text-align: left;
+}
+.suggestions {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    width: 200px;
+}
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+}
+.suggestion-item:hover {
+    background: #f0f0f0;
+}
+/* Input Fields */
+.input-container input,
+.input-container select,
+.input-container textarea {
+    flex: 2; /* Input takes more space */
+    width: 80%; /* Ensure full width */
+    padding: 8px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+    color: #333;
+    font-family: sans-serif;
+}
+
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: calc(100% - 4px);
+    padding: 8px;
+    margin: 2px 2px;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    background-color: #f3f7fb;
+    border-bottom: 1px solid #3AAFA9;
+}
+
+/* Input focus effect */
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: #f3f7fb;
+    border-bottom: 1px solid #3AAFA9;
+}
+
+/* Buttons */
 .button-container {
-display: flex;
-justify-content: center; /* Centers buttons horizontally */
-align-items: center; /* Aligns buttons vertically */
-margin-top: 10px;
-gap: 10px; /* Adds space between buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
 }
 
-.back-button,
-.submit-button {
-padding: 10px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-color: white;
-text-align: center;
+.submit-button,
+.back-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    transition: 0.3s ease-in-out;
 }
-
-
 
 .back-button {
     background-color: black;
 }
 
 .submit-button {
-    background-color: #01b2aa;
+    background-color: #3AAFA9;
 }
 
 .back-button:hover {
     background-color: #333;
 }
 
-#selected_plan {
-    color: #01b2aa;
-}
-
 .submit-button:hover {
-    background-color: #008000;
+    background-color: #2B7A78;
 }
 
-.error {
+/* Error Message */
+#error {
     color: red;
     font-size: 14px;
     display: none;
 }
 
-#step2 {
+/* Steps Hidden by Default */
+#step2,
+#step1 {
     display: none;
 }
 
+/* Terms & Conditions Checkbox */
 .terms-container input {
     margin-right: 1px;
 }
 
+/* Member Verification Tags */
 .tag {
     display: inline-block;
     color: white;
@@ -113,13 +269,11 @@ text-align: center;
 }
 
 .verified {
-    background-color: green;
-    /* Color for verified */
+    background-color: #3AAFA9;
 }
 
 .not-found {
     background-color: red;
-    /* Color for not found */
 }
 
 .delete {
@@ -128,27 +282,43 @@ text-align: center;
     color: white;
     font-weight: bold;
 }
-
+.button-container {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+}
+.table{
+    border-collapse: separate;
+    width: 80%;
+    border-spacing: 0 10px;
+    text-align: center;
+    justify-self: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.phone-input-container{
+    display: flex;
+    width: 66%;
+    gap: 10px;
+}
+.phone-input-container select {
+    margin: 2px;
+}
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.error-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 5px;
+}
 .error {
-    color: red;
-    font-size: 14px;
+    border-bottom: 1px solid #dd3636;
 }
-
-.input-container {
-    max-width: 200px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
-    width: calc(100% - 4px);
-    /* Adjust width to accommodate padding */
-    padding: 5px;
-    margin: 2px 2px;
-    /* Adds a 2px gap on both left and right */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    /* Ensures padding doesn't increase element width */
+.error::placeholder {
+    color: #dd3636;
 }

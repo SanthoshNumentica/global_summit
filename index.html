@@ -4,58 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
 <body>
     <div class="box">
-        <div id="step1">
-            <h1>IAOI Global Implant Summit - 2025 <br>(Aug 2<sup>nd</sup> & 3<sup>rd</sup>) SATURDAY & SUNDAY</h1>
-            <h2 style="color: #01b2aa;">Register Now</h2>
-            <label for="category">Select Plan</label>
-            <select id="category" required onchange="updateFields()">
-                <option value="">Select Plans</option>
-                <option value="IAOI MEMBERS">IAOI Members</option>
-                <option value="AFFLIATE MEMBERS">Affiliate Association Members</option>
-                <option value="COMBO - NEW MEMBER + CONFERENCE">Combo - New Member + Conference</option>
-                <option value="GROUP REGISTRATIONS">Group Registration(Min 10 Members)</option>
-                <option value="INTERNATIONAL DELEGATES">Internatiol Delegates</option>
-            </select>
-
+        <div id="step0">
+            <h1>IAOI Global Implant Summit - 2025 <br>(Aug 2<sup>nd</sup> & 3<sup>rd</sup>)</h1>
+            <h3 class="Register">Register Now</h3>
+            <h4 style="color: #3AAFA9;">Are you an existing member?</h4>
+            <div class="button-container">
+                <button class="submit-button" onclick="handleMembershipChoice('yes')">Yes</button>
+                <button class="submit-button" onclick="handleMembershipChoice('no')">No</button>
+            </div>
+        </div>
+        <div id="step1" class="plan_modal" style="display: none;">
+            <h1>IAOI GLOBAL IMPLANT SUMMIT 2025</h1>
+            <p style="font-size: 18px;">Please fill in the registration details below to secure your spot and be part of
+                this amazing event.</p>
+            <div class="input-container">
+                <label for="category">Select Plan</label>
+                <select id="category" required onchange="updateFields()">
+                    <option value="">Select Plans</option>
+                    <option value="IAOI MEMBERS">IAOI Members</option>
+                    <option value="AFFLIATE MEMBERS">Affiliate Association Members</option>
+                    <option value="COMBO - NEW MEMBER + CONFERENCE">Combo - New Member + Conference</option>
+                    <option value="GROUP REGISTRATIONS">Group Registration (Min 10 Members)</option>
+                    <option value="INTERNATIONAL DELEGATES">International Delegates</option>
+                </select>
+            </div>
             <div id="inputFields"></div>
-            <p class="error" id="error-message">Member not found. Please check the Member ID.</p>
-            <button class="submit-button" onclick="nextStep()">Next</button>
+            <!-- <p class="error" id="error-message">Member not found. Please check the Member ID.</p> -->
+            <div class="button-container" style="margin-top: 30px;">
+                <button class="back-button" onclick="prevStep()">Back</button>
+                <button class="submit-button" onclick="nextStep(event)">Click To Register</button>
+            </div>
         </div>
 
+        <!-- Step 2: Plan Details -->
         <div id="step2">
-            <h3>Plan Details</h3>
-            <table style="border-collapse: collapse; width: 100%; text-align: left;">
+            <h1>Plan Details</h1>
+            <table class="table">
                 <tr>
-                    <td>Selected Plan</td>
+                    <td style="text-align: left;">Selected Plan</td>
                     <td>:</td>
-                    <td><strong id="selected_plan" style="color: #01b2aa;">IAOI MEMBER</strong></td>
+                    <td style="text-align: left;"><strong id="selected_plan" style="color: #01b2aa;"></strong></td>
                 </tr>
                 <tr>
-                    <td>Plan Amount</td>
+                    <td style="text-align: left;">Plan Amount</td>
                     <td>:</td>
-                    <td><strong id="plan_amount">₹0</strong></td>
+                    <td style="text-align: left;"><strong id="plan_amount">₹0</strong></td>
                 </tr>
                 <tr>
-                    <td>GST (18%)</td>
+                    <td style="text-align: left;">GST (18%)</td>
                     <td>:</td>
-                    <td><strong id="gst_amount">₹0</strong></td>
+                    <td style="text-align: left;"><strong id="gst_amount">₹0</strong></td>
                 </tr>
                 <tr>
-                    <td>Total Payable Amount</td>
+                    <td style="text-align: left;">Total Payable Amount</td>
                     <td>:</td>
-                    <td style="color: #01b2aa;"><strong id="total_amount">₹0</strong></td>
+                    <td style="color: #01b2aa; text-align: left;"><strong id="total_amount">₹0</strong></td>
                 </tr>
             </table>
             <div class="button-container">
                 <button class="back-button" onclick="prevStep()">Back</button>
-                <button class="submit-button" type="submit">Pay</button>
+                <button class="submit-button" type="submit">Proceed To Pay</button>
             </div>
         </div>
     </div>
